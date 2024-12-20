@@ -1,0 +1,187 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: test-1
+      id: test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-1
+        setup-command: ''
+        command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find src -name
+          "*.java") && java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT
+          samples/1.soc
+        input: ''
+        expected-output: 'Line:23 -> Redefinition of actor X
+
+          '
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-2
+      id: test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-2
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/2.soc
+        input: ''
+        expected-output: 'Line:23 -> Redefinition of variable john
+
+          '
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-3
+      id: test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-3
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/3.soc
+        input: ''
+        expected-output: 'Line:26 -> Redefinition of Message Handler compare
+
+          '
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-4
+      id: test-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-4
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/4.soc
+        input: ''
+        expected-output: |-
+          Line:17 -> Variable not declared
+          Line:17 -> Variable not declared
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-5
+      id: test-5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-5
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/5.soc
+        input: ''
+        expected-output: 'Line:42 -> Message Handler not declared
+
+          '
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-6
+      id: test-6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-6
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/1.soc
+        input: ''
+        expected-output: |
+          Line:15 -> Message Handler name conflicts with Actor name
+          Line:15 -> Redefinition of Message Handler StringProcessor
+          Line:25 -> Message Handler name conflicts with Actor name
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-7
+      id: test-7
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-7
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/1.soc
+        input: ''
+        expected-output: |
+          Line:9 -> Variable not declared
+          Line:10 -> Redefinition of variable i
+          Line:15 -> Redefinition of variable result
+          Line:19 -> Redefinition of Message Handler testLoops
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-8
+      id: test-8
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-8
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/1.soc
+        input: ''
+        expected-output: |
+          Line:3 -> Redefinition of variable id
+          Line:14 -> Variable not declared
+          Line:17 -> Message Handler name conflicts with Actor name
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-9
+      id: test-9
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-9
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/1.soc
+        input: ''
+        expected-output: 'Line:14 -> Message Handler not declared
+
+          '
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test-10
+      id: test-10
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test-10
+        setup-command: javac -cp utilities/antlr-4.13.1-complete.jar -d out $(find
+          src -name "*.java")
+        command: java -cp out:utilities/antlr-4.13.1-complete.jar main.SOACT samples/1.soc
+        input: ''
+        expected-output: |
+          Line:4 -> Redefinition of variable data
+          Line:9 -> Variable not declared
+          Line:12 -> Redefinition of Message Handler processData
+          Line:16 -> Message Handler name conflicts with Actor name
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-1_RESULTS: "${{steps.test-1.outputs.result}}"
+        TEST-2_RESULTS: "${{steps.test-2.outputs.result}}"
+        TEST-3_RESULTS: "${{steps.test-3.outputs.result}}"
+        TEST-4_RESULTS: "${{steps.test-4.outputs.result}}"
+        TEST-5_RESULTS: "${{steps.test-5.outputs.result}}"
+        TEST-6_RESULTS: "${{steps.test-6.outputs.result}}"
+        TEST-7_RESULTS: "${{steps.test-7.outputs.result}}"
+        TEST-8_RESULTS: "${{steps.test-8.outputs.result}}"
+        TEST-9_RESULTS: "${{steps.test-9.outputs.result}}"
+        TEST-10_RESULTS: "${{steps.test-10.outputs.result}}"
+      with:
+        runners: test-1,test-2,test-3,test-4,test-5,test-6,test-7,test-8,test-9,test-10
